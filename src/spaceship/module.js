@@ -22,6 +22,13 @@ export class Module {
   }
 
   /**
+   * The energy required by this module
+   */
+  get energyConsumption() {
+    return this._energyConsumption;
+  }
+
+  /**
    * True if this module is housed in a compartment, false otherwise.
    * 
    * @param {Compartment} compartment 
@@ -38,7 +45,7 @@ export class Module {
    * @param {Compartment} compartment 
    */
   setCompartment(compartment) {
-    if (this.isInCompartment) {
+    if (this.isHoused) {
       return false;
     }
     this._compartment = compartment;
