@@ -3,5 +3,6 @@
     "editor.detectIndentation": false,
     "files.eol": "\n",
     "files.insertFinalNewline": true,
-    "editor.insertSpaces": true
+    "editor.insertSpaces": true,
+    "editor.rulers": [80, 120]
 }
