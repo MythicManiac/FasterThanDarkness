@@ -1,5 +1,6 @@
-var path = require('path');
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPugin = require("copy-webpack-plugin");
 
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: path.resolve(__dirname, "src/index.html"),
+      template: path.resolve(__dirname, "./src/index.html"),
       inject: true,
       hash: true,
       minify: {
@@ -22,11 +23,15 @@ module.exports = {
         collapseWhitespace: true,
         removeAttributeQuotes: true
       }
-    })
+    }),
+    new CopyWebpackPugin([{
+      "from": path.resolve(__dirname, "./assets/**/*"),
+      "to": path.resolve(__dirname, "./dist/")
+    }])
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "./dist"),
     compress: true,
-    port: 9000
+    port: 80
   }
 };
