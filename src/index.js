@@ -1,6 +1,3 @@
-import { component } from "./second";
-document.body.appendChild(component());
-
 import * as PIXI from 'pixi.js'
 
 const app = new PIXI.Application({
