@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>module.js - Documentation</title>
+    <title>resources.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,7 +31,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">module.js</h1>
+    <h1 class="page-title">resources.js</h1>
     
 
     
@@ -43,106 +43,46 @@
         <article>
             <pre class="prettyprint source linenums"><code>
 /**
- * Spaceship module
+ * Base class for all resource types
  */
-export class Module {
-
+class Resource {
   /**
-   * Creates a new module instance
-   * @param {string} name
-   * @param {number} requiredCapacity
-   * @param {number} requiredEnergy
+   * Initialize the resource
+   * @param {number} value - The initial amount of the resource
    */
-  constructor(name, requiredCapacity, requiredEnergy) {
-    this._name = name;
-    this._requiredCapacity = requiredCapacity;
-    this._requiredEnergy = requiredEnergy;
-    this._compartment = null;
-  }
-
-  /**
-   * Name of the module
-   * @type {string}
-   */
-  get name() {
-    return this._name;
-  }
-
-  /**
-   * The capacity required by this module
-   * @type {number}
-   */
-  get requiredCapacity() {
-    return this._requiredCapacity;
-  }
-
-  /**
-   * The compartment this module is housed in, if any
-   * @type {Compartment}
-   */
-  get compartment() {
-    return this._compartment;
-  }
-
-  /**
-   * The energy required by this module
-   * @type {number}
-   */
-  get requiredEnergy() {
-    return this._requiredEnergy;
-  }
-
-  /**
-   * True if housed in a compartment, false otherwise.
-   * @type {boolean}
-   */
-  get isHoused() {
-    return this._compartment !== null;
-  }
-
-  /**
-   * Sets this modules' compartment.
-   * @param {Compartment} compartment - The compartment to set to
-   * @returns {boolean} True if successfull, false otherwise
-   */
-  setCompartment(compartment) {
-    if (this.isHoused) {
-      return false;
-    }
-    this._compartment = compartment;
-    return true;
-  }
-
-  /**
-   * Unsets this module's compartment.
-   * @param {Compartment} compartment - The compartment to unset
-   * @returns {boolean} True if successfull, false otherwise
-   */
-  unsetCompartment(compartment) {
-    if (this._compartment !== compartment) {
-      return false;
-    }
-    this._compartment = null;
-    return true;
+  constructor(value) {
+    this.value = value;
   }
 }
 
-class EngineModule extends Module {
+/**
+ * Money resource
+ */
+export class Money extends Resource {
 }
 
-class WeaponModule extends Module {
+/**
+ * Crew resource
+ */
+export class Crew extends Resource {
 }
 
-class LifeSupportModule extends Module {
+/**
+ * Energy resource
+ */
+export class Energy extends Resource {
 }
 
-class ShieldModule extends Module {
+/**
+ * Food resource
+ */
+export class Food extends Resource {
 }
 
-class StorageModule extends Module {
-}
-
-class GeneratorModule extends Module {
+/**
+ * Time resource
+ */
+export class Time extends Resource {
 }
 </code></pre>
         </article>
