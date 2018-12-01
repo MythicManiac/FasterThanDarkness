@@ -7,12 +7,42 @@ class Module {
     this.compartment = null;
   }
 
-  get isInCompartment() {
-    /**
-     * Returns true if this module is housed in a compartment,
-     * false otherwise.
-     */
+  /**
+   * Returns true if this module is housed in a compartment, false otherwise.
+   * 
+   * @param {Compartment} compartment 
+   */
+  get isHoused() {
     return this.compartment !== null;
+  }
+
+  /**
+   * Sets this modules' compartment.
+   * 
+   * Returns true if successfull, false otherwise
+   * 
+   * @param {Compartment} compartment 
+   */
+  setCompartment(compartment) {
+    if (this.isInCompartment) {
+      return false;
+    }
+    this.compartment = compartment;
+    return true;
+  }
+
+  /**
+   * Unsets this module's compartment. Returns true if successfull,
+   * false otherwise
+   *
+   * @param {Compartment} compartment 
+   */
+  unsetCompartment(compartment) {
+    if (!this.isInCompartment) {
+      return false;
+    }
+    this.compartment = null;
+    return true;
   }
 }
 
