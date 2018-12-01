@@ -1,9 +1,38 @@
 
 class Compartment {
-  constructor(name, capacity) {
-    this.name = name;
-    this.capacity = capacity;
-    this.modules = [];
+
+  /**
+   * Creates a new compartment instance
+   * 
+   * @param {string} name 
+   * @param {number} maxCapacity 
+   */
+  constructor(name, maxCapacity) {
+    this._name = name;
+    this._usedCapacity = 0;
+    this._maxCapacity = maxCapacity;
+    this._modules = [];
+  }
+  
+  /**
+   * Name of the compartment
+   */
+  get name() {
+    return this._name;
+  }
+
+  /**
+   * Capacity currently in use by modules in the compartment
+   */
+  get usedCapacity() {
+    return this._usedCapacity;
+  }
+
+  /**
+   * Maximum module capacity of the compartment
+   */
+  get maxCapacity() {
+    return this._maxCapacity;
   }
 
   /**
@@ -12,8 +41,24 @@ class Compartment {
    * @param {Module} module 
    */
   hasModule(module) {
-    let index = this.modules.indexOf(module);
+    let index = this._modules.indexOf(module);
     return index !== -1;
+  }
+
+  /**
+   * Returns true if the compartment is full, otherwise false
+   */
+  get isFull() {
+    return this._usedCapacity >= this._maxCapacity;
+  }
+
+  /**
+   * Returns true if the module can fit to the compartment, otherwise false
+   * 
+   * @param {Module} module 
+   */
+  canFitModule(module) {
+    return (this._usedCapacity + module.requiredCapacity) <= this._maxCapacity;
   }
 
   /**
@@ -24,10 +69,12 @@ class Compartment {
    * @param {Module} module 
    */
   addModule(module) {
-    let index = this.modules.indexOf(module);
+    let index = this._modules.indexOf(module);
     if (index === -1) {
-      this.modules.push(module);
-      return true;
+      if (module.setCompartment(this)) {
+        this._modules.push(module);
+        return true;
+      }
     }
     return false;
   }
@@ -40,10 +87,12 @@ class Compartment {
    * @param {Module} module 
    */
   removeModule(module) {
-    let index = this.modules.indexOf(module);
+    let index = this._modules.indexOf(module);
     if (index !== -1) {
-      this.modules.splice(index)
-      return true;
+      if (module.unsetCompartment(this)) {
+        this._modules.splice(index);
+        return true;
+      }
     }
     return false;
   }

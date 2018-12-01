@@ -1,19 +1,33 @@
 
 class Module {
-  constructor(name, size, energyConsumption) {
-    this.name = name;
-    this.size = size;
-    this.energyConsumption = energyConsumption;
-    this.compartment = null;
+  constructor(name, requiredCapacity, energyConsumption) {
+    this._name = name;
+    this._requiredCapacity = requiredCapacity;
+    this._energyConsumption = energyConsumption;
+    this._compartment = null;
   }
 
   /**
-   * Returns true if this module is housed in a compartment, false otherwise.
+   * Name of the module
+   */
+  get name() {
+    return this._name;
+  }
+
+  /**
+   * The capacity required by this module
+   */
+  get requiredCapacity() {
+    return this._requiredCapacity;
+  }
+
+  /**
+   * True if this module is housed in a compartment, false otherwise.
    * 
    * @param {Compartment} compartment 
    */
   get isHoused() {
-    return this.compartment !== null;
+    return this._compartment !== null;
   }
 
   /**
@@ -27,21 +41,21 @@ class Module {
     if (this.isInCompartment) {
       return false;
     }
-    this.compartment = compartment;
+    this._compartment = compartment;
     return true;
   }
 
   /**
    * Unsets this module's compartment. Returns true if successfull,
    * false otherwise
-   *
-   * @param {Compartment} compartment 
+   * 
+   * @param {Compartment} compartment
    */
   unsetCompartment(compartment) {
-    if (!this.isInCompartment) {
+    if (this._compartment !== compartment) {
       return false;
     }
-    this.compartment = null;
+    this._compartment = null;
     return true;
   }
 }
