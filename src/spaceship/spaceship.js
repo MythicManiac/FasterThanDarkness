@@ -1,5 +1,5 @@
 
-class Spaceship {
+export class Spaceship {
   constructor() {
     this.compartments = [];
   }
