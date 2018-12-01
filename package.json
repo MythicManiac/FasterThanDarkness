@@ -1,0 +1,27 @@
+{
+  "name": "FasterThanDarkness",
+  "version": "1.0.0",
+  "description": "Ludum Dare 43 competition entry",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --hot --inline --mode=development --host=localhost --port 80"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MythicManiac/FasterThanDarkness.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/MythicManiac/FasterThanDarkness/issues"
+  },
+  "homepage": "https://github.com/MythicManiac/FasterThanDarkness#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
