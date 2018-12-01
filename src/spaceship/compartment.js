@@ -76,10 +76,14 @@ export class Compartment {
    * @param {Module} module 
    */
   addModule(module) {
+    if (!this.canFitModule(module)) {
+      return false;
+    }
     let index = this._modules.indexOf(module);
     if (index === -1) {
       if (module.setCompartment(this)) {
         this._modules.push(module);
+        this._usedCapacity += module.requiredCapacity;
         return true;
       }
     }
@@ -98,6 +102,7 @@ export class Compartment {
     if (index !== -1) {
       if (module.unsetCompartment(this)) {
         this._modules.splice(index);
+        this._usedCapacity -= module.requiredCapacity;
         return true;
       }
     }

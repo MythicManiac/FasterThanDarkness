@@ -22,6 +22,13 @@ export class Module {
   }
 
   /**
+   * The compartment this module is housed in, if any
+   */
+  get compartment() {
+    return this._compartment;
+  }
+
+  /**
    * The energy required by this module
    */
   get energyConsumption() {

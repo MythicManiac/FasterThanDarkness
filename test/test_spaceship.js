@@ -23,15 +23,20 @@ describe("Spaceship", function() {
       let compartment = new Compartment("Test compartment", 1);
       let compartment2 = new Compartment("Test compartment 2", 1);
       expect(module.isHoused).to.be.false;
+      expect(module.compartment).to.be.null;
       expect(module.setCompartment(compartment)).to.be.true;
+      expect(module.compartment).to.equal(compartment);
       expect(module.isHoused).to.be.true;
       expect(module.setCompartment(compartment2)).to.be.false;  // Already in one
+      expect(module.compartment).to.equal(compartment);
       expect(module.unsetCompartment(compartment2)).to.be.false;  // Wrong one
       expect(module.isHoused).to.be.true;
       expect(module.unsetCompartment(compartment)).to.be.true;
+      expect(module.compartment).be.null;
       expect(module.isHoused).to.be.false;
       expect(module.setCompartment(compartment2)).to.be.true;
       expect(module.isHoused).to.be.true;
+      expect(module.compartment).to.equal(compartment2);
     });
   });
 
@@ -96,6 +101,28 @@ describe("Spaceship", function() {
       expect(compartment.canFitModule(module2)).to.be.false;
       compartment.removeModule(module1);
       expect(compartment.canFitModule(module2)).to.be.true;
+    });
+    it("Should not add modules over capacity", function() {
+      let compartment = new Compartment("Test compartment", 3);
+      let module = new Module("Test module", 5, 1);
+      expect(compartment.canFitModule(module)).to.be.false;
+      expect(compartment.addModule(module)).to.be.false;
+    });
+    it("Should set itself as a modules compartment while adding", function() {
+      let compartment = new Compartment("Test compartment", 3);
+      let module = new Module("Test module", 1, 1);
+      expect(module.compartment).to.be.null;
+      expect(compartment.addModule(module)).to.be.true;
+      expect(module.compartment).to.equal(compartment);
+    });
+    it("Should unset itself as a modules compartment on removal", function() {
+      let compartment = new Compartment("Test compartment", 3);
+      let module = new Module("Test module", 1, 1);
+      expect(module.compartment).to.be.null;
+      expect(compartment.addModule(module)).to.be.true;
+      expect(module.compartment).to.equal(compartment);
+      expect(compartment.removeModule(module)).to.be.true;
+      expect(module.compartment).to.be.null;
     });
   });
 
