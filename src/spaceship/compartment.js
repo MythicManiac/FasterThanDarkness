@@ -1,5 +1,5 @@
 
-class Compartment {
+export class Compartment {
 
   /**
    * Creates a new compartment instance

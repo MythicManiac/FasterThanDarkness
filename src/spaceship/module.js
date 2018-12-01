@@ -1,5 +1,5 @@
 
-class Module {
+export class Module {
   constructor(name, requiredCapacity, energyConsumption) {
     this._name = name;
     this._requiredCapacity = requiredCapacity;
