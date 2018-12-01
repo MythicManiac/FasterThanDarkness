@@ -4,5 +4,9 @@
     "files.eol": "\n",
     "files.insertFinalNewline": true,
     "editor.insertSpaces": true,
-    "editor.rulers": [80, 120]
+    "editor.rulers": [
+      80,
+      120
+    ],
+    "files.trimTrailingWhitespace": true
 }

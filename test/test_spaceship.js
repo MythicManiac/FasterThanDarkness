@@ -16,7 +16,7 @@ describe("Spaceship", function() {
     });
     it("Should have a working energy consumption property", function() {
       let module = new Module("Test module", 1, 5);
-      expect(module.energyConsumption).to.equal(5);
+      expect(module.requiredEnergy).to.equal(5);
     });
     it("Should have working compartment logic", function() {
       let module = new Module("Test module", 1, 1);

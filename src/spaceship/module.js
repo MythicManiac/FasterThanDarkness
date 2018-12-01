@@ -1,14 +1,25 @@
 
+/**
+ * Spaceship module
+ */
 export class Module {
-  constructor(name, requiredCapacity, energyConsumption) {
+
+  /**
+   * Creates a new module instance
+   * @param {string} name
+   * @param {number} requiredCapacity
+   * @param {number} requiredEnergy
+   */
+  constructor(name, requiredCapacity, requiredEnergy) {
     this._name = name;
     this._requiredCapacity = requiredCapacity;
-    this._energyConsumption = energyConsumption;
+    this._requiredEnergy = requiredEnergy;
     this._compartment = null;
   }
 
   /**
    * Name of the module
+   * @type {string}
    */
   get name() {
     return this._name;
@@ -16,6 +27,7 @@ export class Module {
 
   /**
    * The capacity required by this module
+   * @type {number}
    */
   get requiredCapacity() {
     return this._requiredCapacity;
@@ -23,6 +35,7 @@ export class Module {
 
   /**
    * The compartment this module is housed in, if any
+   * @type {Compartment}
    */
   get compartment() {
     return this._compartment;
@@ -30,15 +43,15 @@ export class Module {
 
   /**
    * The energy required by this module
+   * @type {number}
    */
-  get energyConsumption() {
-    return this._energyConsumption;
+  get requiredEnergy() {
+    return this._requiredEnergy;
   }
 
   /**
-   * True if this module is housed in a compartment, false otherwise.
-   * 
-   * @param {Compartment} compartment 
+   * True if housed in a compartment, false otherwise.
+   * @type {boolean}
    */
   get isHoused() {
     return this._compartment !== null;
@@ -46,10 +59,8 @@ export class Module {
 
   /**
    * Sets this modules' compartment.
-   * 
-   * Returns true if successfull, false otherwise
-   * 
-   * @param {Compartment} compartment 
+   * @param {Compartment} compartment - The compartment to set to
+   * @returns {boolean} True if successfull, false otherwise
    */
   setCompartment(compartment) {
     if (this.isHoused) {
@@ -60,10 +71,9 @@ export class Module {
   }
 
   /**
-   * Unsets this module's compartment. Returns true if successfull,
-   * false otherwise
-   * 
-   * @param {Compartment} compartment
+   * Unsets this module's compartment.
+   * @param {Compartment} compartment - The compartment to unset
+   * @returns {boolean} True if successfull, false otherwise
    */
   unsetCompartment(compartment) {
     if (this._compartment !== compartment) {
