@@ -29,6 +29,13 @@ export class Compartment {
   }
 
   /**
+   * Capacity currently available
+   */
+  get freeCapacity() {
+    return this._maxCapacity - this._usedCapacity;
+  }
+
+  /**
    * Maximum module capacity of the compartment
    */
   get maxCapacity() {
@@ -49,7 +56,7 @@ export class Compartment {
    * Returns true if the compartment is full, otherwise false
    */
   get isFull() {
-    return this._usedCapacity >= this._maxCapacity;
+    return this.freeCapacity <= 0;
   }
 
   /**
@@ -58,7 +65,7 @@ export class Compartment {
    * @param {Module} module 
    */
   canFitModule(module) {
-    return (this._usedCapacity + module.requiredCapacity) <= this._maxCapacity;
+    return module.requiredCapacity <= this.freeCapacity;
   }
 
   /**
