@@ -8,5 +8,6 @@
       80,
       120
     ],
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "eslint.enable": true
 }
