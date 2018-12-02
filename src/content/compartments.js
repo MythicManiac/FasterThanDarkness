@@ -2,7 +2,8 @@ import { Compartment } from "../engine/compartment";
 import {
   SmallThruster, MediumThruster, GunTurret,
   LargeThruster, LargeGenerator, LifeSupport,
-  MediumShield
+  MediumShield,
+  MediumGenerator
 } from "./modules";
 
 
@@ -48,7 +49,7 @@ export function Hull() {
 
 export function CargoBay() {
   let compartment = new Compartment("Cargo Bay", 6);
-  compartment.addModule(LargeGenerator());
+  compartment.addModule(MediumGenerator());
   compartment.addModule(LifeSupport());
   compartment.addModule(LifeSupport());
   return compartment;

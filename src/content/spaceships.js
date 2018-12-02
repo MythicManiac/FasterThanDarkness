@@ -7,6 +7,7 @@ import {
 export class Spaceship extends ISpaceship {
   constructor() {
     super();
+    this.initializeModules();
   }
 
   initializeModules() {

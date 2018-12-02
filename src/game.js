@@ -1,13 +1,17 @@
 import * as PIXI from "pixi.js";
+import { Spaceship } from "./content/spaceships";
 PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 
 export class Game {
   constructor() {
     this.app = new PIXI.Application({
-      width: 640,
-      height: 480,
+      width: 1280,
+      height: 720,
       roundPixels: true,
     });
+    this.spaceship = new Spaceship();
+    this.spaceship.updateResources();
+    console.log(this.spaceship.resources.toString());
   }
 
   run() {

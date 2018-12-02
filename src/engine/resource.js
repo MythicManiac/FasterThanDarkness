@@ -93,10 +93,18 @@ export class ResourceCollection {
    * @param {...Resource} resources
    */
   constructor(...resources) {
-    this.resources = new Map();
+    this._resources = new Map();
     resources.forEach(resource => {
       this.add(resource);
     });
+  }
+
+  toString() {
+    let resources = {};
+    this.forEach((resource, resourceClass) => {
+      resources[resourceClass.name] = resource.value;
+    });
+    return JSON.stringify(resources);
   }
 
   /**
@@ -160,7 +168,7 @@ export class ResourceCollection {
    * @type {Function}
    */
   get forEach() {
-    return this.resources.forEach.bind(this.resources);
+    return this._resources.forEach.bind(this._resources);
   }
 
   /**
@@ -168,8 +176,8 @@ export class ResourceCollection {
    * @param {Resource} resource - The resource to be added
    */
   add(resource) {
-    if (this.resources.has(resource.constructor)) {
-      this.resources.get(resource.constructor).add(resource);
+    if (this._resources.has(resource.constructor)) {
+      this._resources.get(resource.constructor).add(resource);
     } else {
       this.set(resource);
     }
@@ -209,10 +217,10 @@ export class ResourceCollection {
    * @returns {number} The resource amount
    */
   get(resourceClass) {
-    if (!this.resources.has(resourceClass)) {
-      this.resources.set(resourceClass, new resourceClass(0));
+    if (!this._resources.has(resourceClass)) {
+      this._resources.set(resourceClass, new resourceClass(0));
     }
-    return this.resources.get(resourceClass).value;
+    return this._resources.get(resourceClass).value;
   }
 
   /**
@@ -221,7 +229,7 @@ export class ResourceCollection {
    */
   set(resource) {
     let val = new resource.constructor(resource.value); // Copy the object
-    this.resources.set(resource.constructor, val);
+    this._resources.set(resource.constructor, val);
   }
 
 
