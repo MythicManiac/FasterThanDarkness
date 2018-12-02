@@ -162,51 +162,93 @@ export class Module {
 }
 
 /**
+ * Abstract base class for modules that provide a single resource only
+ */
+export class SingleResourceModule extends Module {
+
+  /**
+   * Create a new instance of this module
+   * @param {string} name - Name
+   * @param {number} requiredCapacity - Required compartment capacity
+   * @param {number} requiredEnergy - Required amount of energy
+   * @param {number} resourceProvided - Amount of resource
+   */
+  constructor(name, requiredCapacity, requiredEnergy, resourceProvided=1) {
+    super(name, requiredCapacity, requiredEnergy);
+    this.resourceProvided = resourceProvided;
+  }
+
+  /**
+   * The resource type provided by this module, overridden in subclasses
+   * @returns {function(new:Resource)|undefined}
+   */
+  get resourceClass() {
+    return undefined;
+  }
+
+  getPotentialResources() {
+    if(!this.resourceClass) {
+      return new ResourceCollection();
+    }
+    let resource = new this.resourceClass(this.resourceProvided);
+    return new ResourceCollection(resource);
+  }
+}
+
+
+/**
  * Module which provides time
  */
-export class EngineModule extends Module {
-  getPotentialResources() {
-    return new ResourceCollection(new Time(1));
+export class EngineModule extends SingleResourceModule {
+  get resourceClass() {
+    return Time;
   }
 }
 
 /**
  * Module which provides firepower
  */
-export class WeaponModule extends Module {
-  getPotentialResources() {
-    return new ResourceCollection(new Firepower(1));
+export class WeaponModule extends SingleResourceModule {
+  get resourceClass() {
+    return Firepower;
   }
 }
 
 /**
  * Module which provides food
  */
-export class LifeSupportModule extends Module {
-  getPotentialResources() {
-    return new ResourceCollection(new Food(1));
+export class LifeSupportModule extends SingleResourceModule {
+  get resourceClass() {
+    return Food;
   }
 }
 
 /**
  * Module which provides shield
  */
-export class ShieldModule extends Module {
-  getPotentialResources() {
-    return new ResourceCollection(new Shield(1));
+export class ShieldModule extends SingleResourceModule {
+  get resourceClass() {
+    return Shield;
   }
 }
 
 /**
  * Module which provides energy
  */
-export class GeneratorModule extends Module {
+export class GeneratorModule extends SingleResourceModule {
+
+  /**
+   * Create a new generator instance
+   * @param {string} name - Name
+   * @param {number} requiredCapacity - Required compartment capacity
+   * @param {number} energyProvided - Amount of energy provided
+   */
   constructor(name, requiredCapacity, energyProvided) {
     super(name, requiredCapacity, 0);
-    this.energyProvided = energyProvided;
+    this.resourceProvided = energyProvided;
   }
 
-  getPotentialResources() {
-    return new ResourceCollection(new Energy(this.energyProvided));
+  get resourceClass() {
+    return Energy;
   }
 }

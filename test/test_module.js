@@ -1,6 +1,7 @@
 import {
   Module, EngineModule, ShieldModule,
-  LifeSupportModule, WeaponModule, GeneratorModule
+  LifeSupportModule, WeaponModule, GeneratorModule,
+  SingleResourceModule
 } from "../src/spaceship/module";
 import { Compartment } from "../src/spaceship/compartment";
 
@@ -116,5 +117,20 @@ describe("Module", function() {
     expect(module.providePower(energy)).to.be.false;
     expect(energy.energy).to.equal(1);
     expect(module.collectResources().isEqual(nothing)).to.be.true;
+  });
+  describe("SingleResourceModule", function() {
+    it("Should not provide any resource by default", function() {
+      let module = new SingleResourceModule("Test module", 1, 1);
+      let nothing = new ResourceCollection();
+      expect(module.getPotentialResources().isEqual(nothing));
+    });
+    it("Should provide the correct amount of resources", function() {
+      let module = new EngineModule("Engine", 1, 1, 10);
+      let resources = new ResourceCollection(new Time(10));
+      expect(module.getPotentialResources().isEqual(resources));
+      module = new ShieldModule("Shield", 1, 1, 5);
+      resources = new ResourceCollection(new Shield(5));
+      expect(module.getPotentialResources().isEqual(resources));
+    });
   });
 });
