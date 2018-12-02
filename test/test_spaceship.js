@@ -1,4 +1,4 @@
-import { EngineModule, GeneratorModule } from "../src/spaceship/module";
+import { EngineModule, GeneratorModule, ShieldModule } from "../src/spaceship/module";
 import { Compartment } from "../src/spaceship/compartment";
 import { Spaceship } from "../src/spaceship/spaceship";
 
@@ -65,8 +65,8 @@ describe("Spaceship", function() {
       let spaceship = new Spaceship();
       let compartment1 = new Compartment("Compartment 1", 10);
       let compartment2 = new Compartment("Compartment 2", 10);
-      let generator1 = new GeneratorModule("Generator", 1, 0);
-      let generator2 = new GeneratorModule("Generator", 1, 0);
+      let generator1 = new GeneratorModule("Generator", 1, 1);
+      let generator2 = new GeneratorModule("Generator", 1, 1);
       let engine1 = new EngineModule("Engine", 1, 1);
       let engine2 = new EngineModule("Engine", 1, 1);
       expect(spaceship.resources.energy).to.equal(0);
@@ -94,6 +94,47 @@ describe("Spaceship", function() {
       spaceship.updateResources();
       expect(spaceship.resources.energy).to.equal(1);
       expect(spaceship.resources.time).to.equal(0);
+    });
+    it("Should be able to collect resources from powered modules", function() {
+      let spaceship = new Spaceship();
+      let compartment1 = new Compartment("Compartment 1", 10);
+      let compartment2 = new Compartment("Compartment 2", 10);
+      let generator = new GeneratorModule("Generator", 1, 10);
+      let engine = new EngineModule("Engine", 1, 1);
+      let shield = new ShieldModule("Shield", 1, 1);
+      expect(spaceship.addCompartment(compartment1)).to.be.true;
+      expect(spaceship.addCompartment(compartment2)).to.be.true;
+      expect(compartment1.addModule(generator)).to.be.true;
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(10);
+      compartment1.addModule(engine);
+      compartment2.addModule(shield);
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(8);
+      expect(spaceship.resources.shield).to.equal(1);
+      expect(spaceship.resources.time).to.equal(1);
+      expect(spaceship.resources.food).to.equal(0);
+    });
+    it("Should be able to partial collect resources from modules", function() {
+      // This means some modules are unpowered
+      let spaceship = new Spaceship();
+      let compartment1 = new Compartment("Compartment 1", 10);
+      let compartment2 = new Compartment("Compartment 2", 10);
+      let generator = new GeneratorModule("Generator", 1, 1);
+      let engine = new EngineModule("Engine", 1, 1);
+      let shield = new ShieldModule("Shield", 1, 1);
+      expect(spaceship.addCompartment(compartment1)).to.be.true;
+      expect(spaceship.addCompartment(compartment2)).to.be.true;
+      expect(compartment1.addModule(generator)).to.be.true;
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(1);
+      compartment1.addModule(engine);
+      compartment2.addModule(shield);
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(0);
+      expect(spaceship.resources.shield).to.equal(0);
+      expect(spaceship.resources.time).to.equal(1);
+      expect(spaceship.resources.food).to.equal(0);
     });
   });
 });

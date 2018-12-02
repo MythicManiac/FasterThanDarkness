@@ -201,7 +201,12 @@ export class ShieldModule extends Module {
  * Module which provides energy
  */
 export class GeneratorModule extends Module {
+  constructor(name, requiredCapacity, energyProvided) {
+    super(name, requiredCapacity, 0);
+    this.energyProvided = energyProvided;
+  }
+
   getPotentialResources() {
-    return new ResourceCollection(new Energy(1));
+    return new ResourceCollection(new Energy(this.energyProvided));
   }
 }
