@@ -1,4 +1,4 @@
-import { Module } from "../src/spaceship/module";
+import { EngineModule, GeneratorModule } from "../src/spaceship/module";
 import { Compartment } from "../src/spaceship/compartment";
 import { Spaceship } from "../src/spaceship/spaceship";
 
@@ -59,5 +59,41 @@ describe("Spaceship", function() {
   it("Should be able to update total energy and resource status", function() {
     let spaceship = new Spaceship();
     expect(spaceship.resources.energy).to.equal(0);
+  });
+  describe("Resources", function() {
+    it("Should be able to know unused energy amount", function() {
+      let spaceship = new Spaceship();
+      let compartment1 = new Compartment("Compartment 1", 10);
+      let compartment2 = new Compartment("Compartment 2", 10);
+      let generator1 = new GeneratorModule("Generator", 1, 0);
+      let generator2 = new GeneratorModule("Generator", 1, 0);
+      let engine1 = new EngineModule("Engine", 1, 1);
+      let engine2 = new EngineModule("Engine", 1, 1);
+      expect(spaceship.resources.energy).to.equal(0);
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(0);
+      expect(compartment1.addModule(generator1)).to.be.true;
+      expect(spaceship.addCompartment(compartment1)).to.be.true;
+      expect(spaceship.resources.energy).to.equal(0);
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(1);
+      expect(compartment2.addModule(generator2)).to.be.true;
+      expect(spaceship.addCompartment(compartment2)).to.be.true;
+      expect(spaceship.resources.energy).to.equal(1);
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(2);
+      expect(compartment1.addModule(engine1)).to.be.true;
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(1);
+      expect(spaceship.resources.time).to.equal(1);
+      expect(compartment1.addModule(engine2)).to.be.true;
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(0);
+      expect(spaceship.resources.time).to.equal(2);
+      expect(spaceship.removeCompartment(compartment1)).to.be.true;
+      spaceship.updateResources();
+      expect(spaceship.resources.energy).to.equal(1);
+      expect(spaceship.resources.time).to.equal(0);
+    });
   });
 });

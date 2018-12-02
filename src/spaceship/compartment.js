@@ -104,11 +104,10 @@ export class Compartment {
   removeModule(module) {
     let index = this._modules.indexOf(module);
     if (index !== -1) {
-      if (module.unsetCompartment(this)) {
-        this._modules.splice(index, 1);
-        this._usedCapacity -= module.requiredCapacity;
-        return true;
-      }
+      module.unsetCompartment(this);
+      this._modules.splice(index, 1);
+      this._usedCapacity -= module.requiredCapacity;
+      return true;
     }
     return false;
   }
