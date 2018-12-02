@@ -1,7 +1,7 @@
 import {
   Energy, Crew, Food,
   Money, Time, ResourceCollection, Firepower
-} from "../src/spaceship/resource"
+} from "../src/spaceship/resource";
 
 var expect = require("chai").expect;
 
@@ -51,7 +51,7 @@ describe("ResourceCollection", function() {
     let collection = new ResourceCollection(
       new Energy(5),
       new Money(8),
-      new Food(3),
+      new Food(3)
     );
     expect(collection.energy).to.equal(5);
     expect(collection.money).to.equal(8);

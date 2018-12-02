@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
@@ -24,6 +25,12 @@
     "semi": [
       "error",
       "always"
-    ]
-  }
+    ],
+    "rules": {
+      "mocha/no-exclusive-tests": "error"
+    }
+  },
+  "plugins": [
+    "mocha"
+  ]
 }
