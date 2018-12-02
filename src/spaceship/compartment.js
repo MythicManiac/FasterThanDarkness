@@ -79,7 +79,7 @@ export class Compartment {
   /**
    * Add a module to the compartment
    * @param {Module} module - The module to be added
-   * @returns {boolean} True if addition was successfull, false otherwise
+   * @returns {boolean} True if addition was successful, false otherwise
    */
   addModule(module) {
     if (!this.canFitModule(module)) {
@@ -99,7 +99,7 @@ export class Compartment {
   /**
    * Remove a module from the compartment
    * @param {Module} module - The module to remove
-   * @returns {boolean} True if removal was successfull, false otherwise
+   * @returns {boolean} True if removal was successful, false otherwise
    */
   removeModule(module) {
     let index = this._modules.indexOf(module);

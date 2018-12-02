@@ -82,7 +82,7 @@ export class Module {
   /**
    * Sets this modules' compartment.
    * @param {Compartment} compartment - The compartment to set to
-   * @returns {boolean} True if successfull, false otherwise
+   * @returns {boolean} True if successful, false otherwise
    */
   setCompartment(compartment) {
     if (this.isHoused) {
@@ -95,7 +95,7 @@ export class Module {
   /**
    * Unsets this module's compartment.
    * @param {Compartment} compartment - The compartment to unset
-   * @returns {boolean} True if successfull, false otherwise
+   * @returns {boolean} True if successful, false otherwise
    */
   unsetCompartment(compartment) {
     if (this._compartment !== compartment) {
