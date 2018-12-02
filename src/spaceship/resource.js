@@ -149,7 +149,7 @@ export class ResourceCollection {
    * @type {Function}
    */
   get forEach() {
-    return this.resources.forEach;
+    return this.resources.forEach.bind(this.resources);
   }
 
   /**

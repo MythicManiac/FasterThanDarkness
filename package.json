@@ -8,7 +8,7 @@
     "build": "webpack",
     "dev": "webpack-dev-server --hot --inline --mode=development --host=localhost",
     "jsdoc": "jsdoc -c jsdoc.json",
-    "eslint": "eslint src"
+    "eslint": "eslint src test"
   },
   "repository": {
     "type": "git",

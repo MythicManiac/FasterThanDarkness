@@ -52,11 +52,15 @@ describe("ResourceCollection", function() {
     let collection = new ResourceCollection(
       new Energy(5),
       new Money(8),
-      new Food(3)
+      new Food(3),
+      new Firepower(2),
+      new Firepower(3)
     );
     expect(collection.energy).to.equal(5);
     expect(collection.money).to.equal(8);
     expect(collection.food).to.equal(3);
+    expect(collection.firepower).to.equal(5); // 3 + 2
+    expect(collection.time).to.equal(0);
   });
   it("Should be able to add and get different resource types", function() {
     let collection = new ResourceCollection();
@@ -93,5 +97,62 @@ describe("ResourceCollection", function() {
     expect(collection.energy).to.equal(12);
     collection.substract(new Money(5));
     expect(collection.money).to.equal(-5);
+  });
+  it("Should be able to loop over resources", function() {
+    let collection = new ResourceCollection(
+      new Energy(1),
+      new Food(2),
+      new Money(3)
+    );
+    let types = [Energy, Food, Money];
+    let found = [];
+    collection.forEach((resource, resourceType) => {
+      let index = types.indexOf(resourceType);
+      expect(index).to.not.equal(-1);
+      found.push(resourceType);
+    });
+    types.forEach(resourceType => {
+      let index = found.indexOf(resourceType);
+      expect(index).to.not.equal(-1);
+    });
+    expect(types.length).to.equal(3);
+  });
+  it("Should be able to add another collection with itself", function() {
+    let collection1 = new ResourceCollection(
+      new Energy(1),
+      new Food(2),
+      new Money(3)
+    );
+    let collection2 = new ResourceCollection(
+      new Energy(4),
+      new Food(5),
+      new Money(6)
+    );
+    collection1.addFromCollection(collection2);
+    expect(collection1.energy).to.equal(5);
+    expect(collection1.food).to.equal(7);
+    expect(collection1.money).to.equal(9);
+    expect(collection2.energy).to.equal(4);
+    expect(collection2.food).to.equal(5);
+    expect(collection2.money).to.equal(6);
+  });
+  it("Should be able to substract another collection from itself", function() {
+    let collection1 = new ResourceCollection(
+      new Energy(1),
+      new Food(2),
+      new Money(3)
+    );
+    let collection2 = new ResourceCollection(
+      new Energy(4),
+      new Food(5),
+      new Money(6)
+    );
+    collection1.substractFromCollection(collection2);
+    expect(collection1.energy).to.equal(-3);
+    expect(collection1.food).to.equal(-3);
+    expect(collection1.money).to.equal(-3);
+    expect(collection2.energy).to.equal(4);
+    expect(collection2.food).to.equal(5);
+    expect(collection2.money).to.equal(6);
   });
 });
