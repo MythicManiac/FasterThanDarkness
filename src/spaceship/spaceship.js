@@ -11,6 +11,34 @@ export class Spaceship {
   }
 
   /**
+   * Removes a compartment from the spaceship
+   * @param {Compartment} compartment - Compartment to be removed
+   * @returns {boolean} True if successful, false otherwise
+   */
+  addCompartment(compartment) {
+    let index = this._compartments.indexOf(compartment);
+    if (index === -1) {
+      this._compartments.push(compartment);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Adds a compartment to the spaceship
+   * @param {Compartment} compartment - Compartment to be added
+   * @returns {boolean} True if successful, false otherwise
+   */
+  removeCompartment(compartment) {
+    let index = this._compartments.indexOf(compartment);
+    if (index !== -1) {
+      this._modules.splice(index);
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Performs an update on the current resource status. This will:
    * - Collect the total available energy
    * - Update the power state of modules according to available energy
