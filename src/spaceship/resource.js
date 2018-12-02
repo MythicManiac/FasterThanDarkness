@@ -29,7 +29,7 @@ class Resource {
       let correct = this.constructor.name;
       throw new Error(`Can't add ${attempt} to ${correct}`);
     }
-    this._value += resource.value
+    this._value += resource.value;
   }
 
   /**
@@ -85,9 +85,15 @@ export class ResourceCollection {
 
   /**
    * Instantiates a new resource collection
+   * @param {...Resource} resources
    */
-  constructor() {
+  constructor(...resources) {
     this.resources = new Map();
+    if (resources) {
+      resources.forEach(resource => {
+        this.add(resource);
+      });
+    }
   }
 
   /**
@@ -148,14 +154,14 @@ export class ResourceCollection {
 
   /**
    * Adds an amount of a given resource to this collection
-   * @param {Resource} resource - The resource amount to be added
+   * @param {Resource} resource - The resource to be added
    */
   add(resource) {
-    if (this.resources.has(constructor)) {
+    if (this.resources.has(resource.constructor)) {
       this.resources.get(resource.constructor).add(resource);
     } else {
-      let val = new resource.constructor(resource.value);
-      this.resources.set(resources.constructor, val);
+      let val = new resource.constructor(resource.value); // Copy the object
+      this.resources.set(resource.constructor, val);
     }
   }
 
@@ -196,6 +202,6 @@ export class ResourceCollection {
     if (!this.resources.has(resourceClass)) {
       this.resources.set(resourceClass, new resourceClass(0));
     }
-    return this.resources.get(resourceClass);
+    return this.resources.get(resourceClass).value;
   }
 }

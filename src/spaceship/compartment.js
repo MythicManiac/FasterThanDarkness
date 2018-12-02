@@ -1,4 +1,4 @@
-import { ResourceCollection } from "./resource"
+import { ResourceCollection } from "./resource";
 
 /**
  * Spaceship compartment
@@ -120,7 +120,7 @@ export class Compartment {
   getProvidedResources() {
     let totalResources = new ResourceCollection();
     this._modules.forEach(module => {
-      totalResources.add(module.getProvidedResources());
+      totalResources.addFromCollection(module.getProvidedResources());
     });
   }
 }

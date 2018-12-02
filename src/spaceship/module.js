@@ -1,4 +1,4 @@
-import { Energy } from "./resource";
+import { ResourceCollection, Energy } from "./resource";
 
 /**
  * Spaceship module
@@ -89,26 +89,31 @@ export class Module {
    * @returns {Resource[]} The provided resources
    */
   getProvidedResources() {
-    return [
-      new Energy(1) // TODO: Remove placeholder
-    ];
+    // TODO: Remove placeholder
+    return new ResourceCollection(new Energy(1));
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 class EngineModule extends Module {
 }
 
+// eslint-disable-next-line no-unused-vars
 class WeaponModule extends Module {
 }
 
+// eslint-disable-next-line no-unused-vars
 class LifeSupportModule extends Module {
 }
 
+// eslint-disable-next-line no-unused-vars
 class ShieldModule extends Module {
 }
 
+// eslint-disable-next-line no-unused-vars
 class StorageModule extends Module {
 }
 
+// eslint-disable-next-line no-unused-vars
 class GeneratorModule extends Module {
 }

@@ -1,7 +1,4 @@
-import {
-  Energy, Crew, Food,
-  Money, Time, ResourceCollection
-} from "./resource"
+import { ResourceCollection } from "./resource";
 
 
 export class Spaceship {
@@ -16,8 +13,5 @@ export class Spaceship {
    * collect resources provided by modules.
    */
   updateModules() {
-    this._compartments.forEach(compartment => {
-      compartment
-    });
   }
 }

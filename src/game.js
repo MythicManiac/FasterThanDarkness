@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js'
+import * as PIXI from "pixi.js";
 PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 
 export class Game {
@@ -14,7 +14,7 @@ export class Game {
     document.body.appendChild(this.app.view);
     PIXI.loader
       .add("assets/ship.png")
-      .load(this.setup.bind(this))
+      .load(this.setup.bind(this));
   }
 
   setup() {
