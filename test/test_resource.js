@@ -3,7 +3,8 @@ import {
   Money, Time, ResourceCollection, Firepower
 } from "../src/spaceship/resource";
 
-var expect = require("chai").expect;
+import { expect } from "chai";
+
 
 describe("Resources", function() {
   it("Should be able to initialize with a given value", function() {

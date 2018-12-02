@@ -1,8 +1,8 @@
-import { Module } from "../src/spaceship/module"
-import { Compartment } from "../src/spaceship/compartment"
-import { Spaceship } from "../src/spaceship/spaceship"
+import { Module } from "../src/spaceship/module";
+import { Compartment } from "../src/spaceship/compartment";
 
-var expect = require("chai").expect;
+import { expect } from "chai";
+
 
 describe("Spaceship", function() {
   describe("Module", function() {
