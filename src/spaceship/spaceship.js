@@ -11,6 +11,24 @@ export class Spaceship {
   }
 
   /**
+   * @returns {ResourceCollection} A copy of the spaceship resource collection
+   */
+  get resources() {
+    let result = new ResourceCollection();
+    result.addFromCollection(this._resources);
+    return result;
+  }
+
+  /**
+   * Checks if a compartment is in this spaceship
+   * @param {Compartment} compartment - Compartment to check for
+   * @returns {boolean} True if found, false otherwise
+   */
+  hasCompartment(compartment) {
+    return this._compartments.indexOf(compartment) !== -1;
+  }
+
+  /**
    * Removes a compartment from the spaceship
    * @param {Compartment} compartment - Compartment to be removed
    * @returns {boolean} True if successful, false otherwise
@@ -32,7 +50,7 @@ export class Spaceship {
   removeCompartment(compartment) {
     let index = this._compartments.indexOf(compartment);
     if (index !== -1) {
-      this._modules.splice(index);
+      this._compartments.splice(index, 1);
       return true;
     }
     return false;
