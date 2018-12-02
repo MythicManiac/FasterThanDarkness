@@ -26,7 +26,7 @@
 
 <nav>
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#getProvidedResources">getProvidedResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#getProvidedResources">getProvidedResources</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Time.html">Time</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#collectResources">collectResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#providePower">providePower</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#collectResources">collectResources</a></li><li data-type='method'><a href="Module.html#getPotentialResources">getPotentialResources</a></li><li data-type='method'><a href="Module.html#providePower">providePower</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#set">set</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Shield.html">Shield</a></li><li><a href="Spaceship.html">Spaceship</a><ul class='methods'><li data-type='method'><a href="Spaceship.html#updateResources">updateResources</a></li></ul></li><li><a href="Time.html">Time</a></li></ul>
 </nav>
 
 <div id="main">
@@ -74,7 +74,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line6">line 6</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -266,7 +266,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line41">line 41</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -328,6 +328,152 @@
 
         
             
+<h4 class="name" id="hasPower"><span class="type-signature"></span>hasPower<span class="type-signature"> :boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Does this module have fule?
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="isDisabled"><span class="type-signature"></span>isDisabled<span class="type-signature"> :boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line46">line 46</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Is this module disabled?
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="isHoused"><span class="type-signature"></span>isHoused<span class="type-signature"> :boolean</span></h4>
 
 
@@ -339,7 +485,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line57">line 57</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -412,7 +558,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line25">line 25</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line30">line 30</a>
     </li></ul></dd>
     
 
@@ -485,7 +631,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line33">line 33</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -558,7 +704,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line49">line 49</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line70">line 70</a>
     </li></ul></dd>
     
 
@@ -629,7 +775,7 @@
 
     
 
-    <h4 class="name" id="getProvidedResources"><span class="type-signature"></span>getProvidedResources<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Resource.html">Resource</a>>}</span></h4>
+    <h4 class="name" id="collectResources"><span class="type-signature"></span>collectResources<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ResourceCollection.html">ResourceCollection</a>}</span></h4>
 
     
 
@@ -641,7 +787,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line91">line 91</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line132">line 132</a>
     </li></ul></dd>
     
 
@@ -681,7 +827,7 @@
 
 
 <div class="description">
-    Gets the resources provided by this module
+    Collects the resources produced by this module if it has power
 </div>
 
 
@@ -721,13 +867,253 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;<a href="Resource.html">Resource</a>></span>
+<span class="param-type"><a href="ResourceCollection.html">ResourceCollection</a></span>
 
 
     </dd>
 </dl>
 
     
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getPotentialResources"><span class="type-signature"></span>getPotentialResources<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="ResourceCollection.html">ResourceCollection</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line144">line 144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Gets a ResourceCollection of resources this module will provide when
+powered
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Resources the module is capable of outputting
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="ResourceCollection.html">ResourceCollection</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="providePower"><span class="type-signature"></span>providePower<span class="signature">(availableResources)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line112">line 112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Provides this module with power from a ResourceCollection
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>availableResources</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ResourceCollection.html">ResourceCollection</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         
@@ -747,7 +1133,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line66">line 66</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -902,7 +1288,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="module.js.html">module.js</a>, <a href="module.js.html#line79">line 79</a>
+        <a href="module.js.html">module.js</a>, <a href="module.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
@@ -1060,7 +1446,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 05:34:57 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 06:53:52 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

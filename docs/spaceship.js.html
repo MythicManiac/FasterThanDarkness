@@ -26,7 +26,7 @@
 
 <nav>
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#getProvidedResources">getProvidedResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#getProvidedResources">getProvidedResources</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Time.html">Time</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#collectResources">collectResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#providePower">providePower</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#collectResources">collectResources</a></li><li data-type='method'><a href="Module.html#getPotentialResources">getPotentialResources</a></li><li data-type='method'><a href="Module.html#providePower">providePower</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#set">set</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Shield.html">Shield</a></li><li><a href="Spaceship.html">Spaceship</a><ul class='methods'><li data-type='method'><a href="Spaceship.html#updateResources">updateResources</a></li></ul></li><li><a href="Time.html">Time</a></li></ul>
 </nav>
 
 <div id="main">
@@ -41,9 +41,12 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ResourceCollection } from "./resource";
+            <pre class="prettyprint source linenums"><code>import { ResourceCollection, Energy } from "./resource";
 
 
+/**
+ * Spaceship
+ */
 export class Spaceship {
   constructor() {
     this._compartments = [];
@@ -51,11 +54,25 @@ export class Spaceship {
   }
 
   /**
-   * Perform an update check on all modules. This will recalculate current
-   * energy production, disable modules if there's not enough energy, and
-   * collect resources provided by modules.
+   * Performs an update on the current resource status. This will:
+   * - Collect the total available energy
+   * - Update the power state of modules according to available energy
+   * - Collect the resources provided by all powered modules
    */
-  updateModules() {
+  updateResources() {
+    let energyCollection = new ResourceCollection();
+    this._compartments.forEach(compartment => {
+      energyCollection.addFromCollection(compartment.collectResources());
+    });
+    this._compartments.forEach(compartment => {
+      compartment.providePower(energyCollection);
+    });
+    let resources = new ResourceCollection();
+    this._compartments.forEach(compartment => {
+      resources.addFromCollection(compartment.collectResources());
+    });
+    resources.set(new Energy(energyCollection.energy));
+    this._resources = resources;
   }
 }
 </code></pre>
@@ -72,7 +89,7 @@ export class Spaceship {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 05:34:57 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 06:53:52 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

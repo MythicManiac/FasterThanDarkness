@@ -1,6 +1,9 @@
 import { ResourceCollection, Energy } from "./resource";
 
 
+/**
+ * Spaceship
+ */
 export class Spaceship {
   constructor() {
     this._compartments = [];
