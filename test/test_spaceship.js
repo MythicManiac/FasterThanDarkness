@@ -56,10 +56,6 @@ describe("Spaceship", function() {
     expect(spaceship.hasCompartment(comp1)).to.be.false;
     expect(spaceship.hasCompartment(comp2)).to.be.false;
   });
-  it("Should be able to update total energy and resource status", function() {
-    let spaceship = new Spaceship();
-    expect(spaceship.resources.energy).to.equal(0);
-  });
   describe("Resources", function() {
     it("Should be able to know unused energy amount", function() {
       let spaceship = new Spaceship();
