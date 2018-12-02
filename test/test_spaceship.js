@@ -57,5 +57,7 @@ describe("Spaceship", function() {
     expect(spaceship.hasCompartment(comp2)).to.be.false;
   });
   it("Should be able to update total energy and resource status", function() {
+    let spaceship = new Spaceship();
+    expect(spaceship.resources.energy).to.equal(0);
   });
 });

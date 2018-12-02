@@ -94,11 +94,9 @@ export class ResourceCollection {
    */
   constructor(...resources) {
     this.resources = new Map();
-    if (resources) {
-      resources.forEach(resource => {
-        this.add(resource);
-      });
-    }
+    resources.forEach(resource => {
+      this.add(resource);
+    });
   }
 
   /**
@@ -224,5 +222,25 @@ export class ResourceCollection {
   set(resource) {
     let val = new resource.constructor(resource.value); // Copy the object
     this.resources.set(resource.constructor, val);
+  }
+
+
+  /**
+   * Checks if this collection is equal with another resource collection
+   * @param {ResourceCollection} resourceCollection - The another collection
+   */
+  isEqual(resourceCollection) {
+    let isEqual = true;
+    resourceCollection.forEach((resource, resourceClass) => {
+      if (this.get(resourceClass) != resource.value) {
+        isEqual = false;
+      }
+    });
+    this.forEach((resource, resourceClass) => {
+      if (resourceCollection.get(resourceClass) != resource.value) {
+        isEqual = false;
+      }
+    });
+    return isEqual;
   }
 }

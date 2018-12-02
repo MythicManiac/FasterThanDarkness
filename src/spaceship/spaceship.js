@@ -11,12 +11,10 @@ export class Spaceship {
   }
 
   /**
-   * @returns {ResourceCollection} A copy of the spaceship resource collection
+   * @returns {ResourceCollection} This spaceship's resources
    */
   get resources() {
-    let result = new ResourceCollection();
-    result.addFromCollection(this._resources);
-    return result;
+    return this._resources;
   }
 
   /**

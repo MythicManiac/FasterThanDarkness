@@ -4,6 +4,7 @@ import {
 } from "../src/spaceship/resource";
 
 import { expect } from "chai";
+import { isRegExp } from "util";
 
 
 describe("Resources", function() {
@@ -106,18 +107,11 @@ describe("ResourceCollection", function() {
       new Food(2),
       new Money(3)
     );
-    let types = [Energy, Food, Money];
-    let found = [];
-    collection.forEach((resource, resourceType) => {
-      let index = types.indexOf(resourceType);
-      expect(index).to.not.equal(-1);
-      found.push(resourceType);
+    let newCollection = new ResourceCollection();
+    collection.forEach(resource => {
+      newCollection.add(resource);
     });
-    types.forEach(resourceType => {
-      let index = found.indexOf(resourceType);
-      expect(index).to.not.equal(-1);
-    });
-    expect(types.length).to.equal(3);
+    expect(collection.isEqual(newCollection)).to.be.true;
   });
   it("Should be able to add another collection with itself", function() {
     let collection1 = new ResourceCollection(
@@ -156,5 +150,30 @@ describe("ResourceCollection", function() {
     expect(collection2.energy).to.equal(4);
     expect(collection2.food).to.equal(5);
     expect(collection2.money).to.equal(6);
+  });
+  it("Should be able to check equality with another collection", function(){
+    let collection1 = new ResourceCollection(
+      new Energy(1),
+      new Food(2)
+    );
+    let collection2 = new ResourceCollection(
+      new Energy(1),
+      new Food(2)
+    );
+    expect(collection1.isEqual(collection2)).to.be.true;
+    expect(collection2.isEqual(collection1)).to.be.true;
+    let collection3 = new ResourceCollection(
+      new Energy(1),
+      new Food(2),
+      new Time(0)
+    );
+    expect(collection1.isEqual(collection3)).to.be.true;
+    expect(collection2.isEqual(collection3)).to.be.true;
+    collection3.add(new Energy(1));
+    expect(collection3.energy).to.equal(2);
+    expect(collection1.energy).to.equal(1);
+    expect(collection1.isEqual(collection3)).to.be.false;
+    expect(collection2.isEqual(collection3)).to.be.false;
+    expect(collection3.isEqual(collection3)).to.be.true;
   });
 });

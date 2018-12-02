@@ -19,7 +19,7 @@ export class Module {
     this._requiredCapacity = requiredCapacity;
     this._requiredEnergy = requiredEnergy;
     this._compartment = null;
-    this._hasPower = false;
+    this._hasPower = requiredEnergy <= 0;
     this._isDisabled = false;
   }
 
@@ -80,6 +80,20 @@ export class Module {
   }
 
   /**
+   * Enable this module
+   */
+  disable() {
+    this._isDisabled = true;
+  }
+
+  /**
+   * Disable this module
+   */
+  enable() {
+    this._isDisabled = false;
+  }
+
+  /**
    * Sets this modules' compartment.
    * @param {Compartment} compartment - The compartment to set to
    * @returns {boolean} True if successful, false otherwise
@@ -110,16 +124,17 @@ export class Module {
    * @param {ResourceCollection} availableResources
    */
   providePower(availableResources) {
-    this.hasPower = false;
+    this._hasPower = false;
     if (this.isDisabled) {
       return false;
     }
     if (this.requiredEnergy <= 0) {
-      this.hasPower = true;
+      this._hasPower = true;
       return true;
     }
     if (availableResources.energy >= this.requiredEnergy) {
       availableResources.substract(new Energy(this.requiredEnergy));
+      this._hasPower = true;
       return true;
     }
     return false;
@@ -146,36 +161,46 @@ export class Module {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class EngineModule extends Module {
+/**
+ * Module which provides time
+ */
+export class EngineModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Time(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class WeaponModule extends Module {
+/**
+ * Module which provides firepower
+ */
+export class WeaponModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Firepower(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class LifeSupportModule extends Module {
+/**
+ * Module which provides food
+ */
+export class LifeSupportModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Food(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class ShieldModule extends Module {
+/**
+ * Module which provides shield
+ */
+export class ShieldModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Shield(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class GeneratorModule extends Module {
+/**
+ * Module which provides energy
+ */
+export class GeneratorModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Energy(1));
   }
