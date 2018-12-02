@@ -1,3 +1,4 @@
+import { ResourceCollection } from "./resource"
 
 /**
  * Spaceship compartment
@@ -15,7 +16,7 @@ export class Compartment {
     this._maxCapacity = maxCapacity;
     this._modules = [];
   }
-  
+
   /**
    * Name of the compartment
    * @type {string}
@@ -110,5 +111,16 @@ export class Compartment {
       }
     }
     return false;
+  }
+
+  /**
+   * Perform an update check on all modules. This will recalculate current
+   * energy production and other resources provided by modules.
+   */
+  getProvidedResources() {
+    let totalResources = new ResourceCollection();
+    this._modules.forEach(module => {
+      totalResources.add(module.getProvidedResources());
+    });
   }
 }

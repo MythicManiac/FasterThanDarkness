@@ -1,16 +1,13 @@
-import { Energy, Crew, Food, Money, Time } from "./resources"
+import {
+  Energy, Crew, Food,
+  Money, Time, ResourceCollection
+} from "./resource"
 
 
 export class Spaceship {
   constructor() {
-    this.compartments = [];
-    this.resources = new Map([
-      [Energy, new Energy(0)],
-      [Crew, new Crew(0)],
-      [Food, new Food(0)],
-      [Money, new Money(0)],
-      [Time, new Time(0)],
-    ]);
+    this._compartments = [];
+    this._resources = new ResourceCollection();
   }
 
   /**
@@ -19,5 +16,8 @@ export class Spaceship {
    * collect resources provided by modules.
    */
   updateModules() {
+    this._compartments.forEach(compartment => {
+      compartment
+    });
   }
 }

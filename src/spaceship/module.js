@@ -1,3 +1,4 @@
+import { Energy } from "./resource";
 
 /**
  * Spaceship module
@@ -81,6 +82,16 @@ export class Module {
     }
     this._compartment = null;
     return true;
+  }
+
+  /**
+   * Gets the resources provided by this module
+   * @returns {Resource[]} The provided resources
+   */
+  getProvidedResources() {
+    return [
+      new Energy(1) // TODO: Remove placeholder
+    ];
   }
 }
 
