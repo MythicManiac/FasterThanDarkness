@@ -26,7 +26,7 @@
 
 <nav>
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#collectResources">collectResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#providePower">providePower</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#collectResources">collectResources</a></li><li data-type='method'><a href="Module.html#getPotentialResources">getPotentialResources</a></li><li data-type='method'><a href="Module.html#providePower">providePower</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#set">set</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Shield.html">Shield</a></li><li><a href="Spaceship.html">Spaceship</a><ul class='methods'><li data-type='method'><a href="Spaceship.html#updateResources">updateResources</a></li></ul></li><li><a href="Time.html">Time</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#collectResources">collectResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#providePower">providePower</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#collectResources">collectResources</a></li><li data-type='method'><a href="Module.html#getPotentialResources">getPotentialResources</a></li><li data-type='method'><a href="Module.html#providePower">providePower</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#set">set</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Shield.html">Shield</a></li><li><a href="Spaceship.html">Spaceship</a><ul class='methods'><li data-type='method'><a href="Spaceship.html#addCompartment">addCompartment</a></li><li data-type='method'><a href="Spaceship.html#removeCompartment">removeCompartment</a></li><li data-type='method'><a href="Spaceship.html#updateResources">updateResources</a></li></ul></li><li><a href="Time.html">Time</a></li></ul>
 </nav>
 
 <div id="main">
@@ -125,7 +125,7 @@ export class Module {
   /**
    * Sets this modules' compartment.
    * @param {Compartment} compartment - The compartment to set to
-   * @returns {boolean} True if successfull, false otherwise
+   * @returns {boolean} True if successful, false otherwise
    */
   setCompartment(compartment) {
     if (this.isHoused) {
@@ -138,7 +138,7 @@ export class Module {
   /**
    * Unsets this module's compartment.
    * @param {Compartment} compartment - The compartment to unset
-   * @returns {boolean} True if successfull, false otherwise
+   * @returns {boolean} True if successful, false otherwise
    */
   unsetCompartment(compartment) {
     if (this._compartment !== compartment) {
@@ -237,7 +237,7 @@ class GeneratorModule extends Module {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 06:53:52 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 16:51:19 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
