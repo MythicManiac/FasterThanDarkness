@@ -56,6 +56,17 @@ describe("Spaceship", function() {
     expect(spaceship.hasCompartment(comp1)).to.be.false;
     expect(spaceship.hasCompartment(comp2)).to.be.false;
   });
+  it("Should be able to fetch a compartment by name", function() {
+    let spaceship = new Spaceship();
+    let comp1 = new Compartment("Test compartment 1", 5);
+    let comp2 = new Compartment("Test compartment 2", 4);
+    expect(spaceship.addCompartment(comp1)).to.be.true;
+    expect(spaceship.addCompartment(comp2)).to.be.true;
+    let fetched1 = spaceship.getCompartmentByName("Test compartment 1");
+    let fetched2 = spaceship.getCompartmentByName("Test compartment 2");
+    expect(fetched1).to.equal(comp1);
+    expect(fetched2).to.equal(comp2);
+  });
   describe("Resources", function() {
     it("Should be able to know unused energy amount", function() {
       let spaceship = new Spaceship();

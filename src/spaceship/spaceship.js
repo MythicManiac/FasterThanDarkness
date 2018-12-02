@@ -6,6 +6,7 @@ import { ResourceCollection, Energy } from "./resource";
  */
 export class Spaceship {
   constructor() {
+    // TODO: Convert to use a Map() instead, mapping by name
     this._compartments = [];
     this._resources = new ResourceCollection();
   }
@@ -52,6 +53,20 @@ export class Spaceship {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Returns the last compartment with a matching name
+   * @param {string} name
+   */
+  getCompartmentByName(name) {
+    let result;
+    this._compartments.forEach(compartment => {
+      if (compartment.name === name) {
+        result = compartment;
+      }
+    });
+    return result;
   }
 
   /**
