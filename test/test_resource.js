@@ -1,5 +1,5 @@
 import {
-  Energy, Crew, Food,
+  Energy, Crew, Food, Shield,
   Money, Time, ResourceCollection, Firepower
 } from "../src/spaceship/resource";
 
@@ -80,12 +80,14 @@ describe("ResourceCollection", function() {
     collection.add(new Time(2));
     collection.add(new Crew(8));
     collection.add(new Food(1));
+    collection.add(new Shield(12));
     expect(collection.energy).to.equal(4);
     expect(collection.money).to.equal(10);
     expect(collection.firepower).to.equal(3);
     expect(collection.time).to.equal(2);
     expect(collection.crew).to.equal(8);
     expect(collection.food).to.equal(1);
+    expect(collection.shield).to.equal(12);
   });
   it("Should be able to substract from resources", function() {
     let collection = new ResourceCollection();

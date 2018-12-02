@@ -1,4 +1,4 @@
-import { ResourceCollection } from "./resource";
+import { ResourceCollection, Energy } from "./resource";
 
 
 export class Spaceship {
@@ -8,10 +8,24 @@ export class Spaceship {
   }
 
   /**
-   * Perform an update check on all modules. This will recalculate current
-   * energy production, disable modules if there's not enough energy, and
-   * collect resources provided by modules.
+   * Performs an update on the current resource status. This will:
+   * - Collect the total available energy
+   * - Update the power state of modules according to available energy
+   * - Collect the resources provided by all powered modules
    */
-  updateModules() {
+  updateResources() {
+    let energyCollection = new ResourceCollection();
+    this._compartments.forEach(compartment => {
+      energyCollection.addFromCollection(compartment.collectResources());
+    });
+    this._compartments.forEach(compartment => {
+      compartment.providePower(energyCollection);
+    });
+    let resources = new ResourceCollection();
+    this._compartments.forEach(compartment => {
+      resources.addFromCollection(compartment.collectResources());
+    });
+    resources.set(new Energy(energyCollection.energy));
+    this._resources = resources;
   }
 }

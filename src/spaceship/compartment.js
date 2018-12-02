@@ -114,13 +114,24 @@ export class Compartment {
   }
 
   /**
-   * Perform an update check on all modules. This will recalculate current
-   * energy production and other resources provided by modules.
+   * Provides this module with power from a ResourceCollection
+   * @param {ResourceCollection} availableResources
    */
-  getProvidedResources() {
+  providePower(availableResources) {
+    this._modules.forEach(module => {
+      module.providePower(availableResources);
+    });
+  }
+
+  /**
+   * Returns all resources provided by the modules in this compartment
+   * @returns {ResourceCollection} The resources provided by this compartment
+   */
+  collectResources() {
     let totalResources = new ResourceCollection();
     this._modules.forEach(module => {
-      totalResources.addFromCollection(module.getProvidedResources());
+      totalResources.addFromCollection(module.collectResources());
     });
+    return totalResources;
   }
 }

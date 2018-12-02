@@ -1,4 +1,7 @@
-import { ResourceCollection, Energy } from "./resource";
+import {
+  ResourceCollection, Energy, Time,
+  Firepower, Food, Shield
+} from "./resource";
 
 /**
  * Spaceship module
@@ -16,6 +19,8 @@ export class Module {
     this._requiredCapacity = requiredCapacity;
     this._requiredEnergy = requiredEnergy;
     this._compartment = null;
+    this._hasPower = false;
+    this._isDisabled = false;
   }
 
   /**
@@ -24,6 +29,22 @@ export class Module {
    */
   get name() {
     return this._name;
+  }
+
+  /**
+   * Does this module have fule?
+   * @type {boolean}
+   */
+  get hasPower() {
+    return this._hasPower;
+  }
+
+  /**
+   * Is this module disabled?
+   * @type {boolean}
+   */
+  get isDisabled() {
+    return this._isDisabled;
   }
 
   /**
@@ -85,35 +106,77 @@ export class Module {
   }
 
   /**
-   * Gets the resources provided by this module
-   * @returns {Resource[]} The provided resources
+   * Provides this module with power from a ResourceCollection
+   * @param {ResourceCollection} availableResources
    */
-  getProvidedResources() {
-    // TODO: Remove placeholder
-    return new ResourceCollection(new Energy(1));
+  providePower(availableResources) {
+    this.hasPower = false;
+    if (this.isDisabled) {
+      return false;
+    }
+    if (this.requiredEnergy <= 0) {
+      this.hasPower = true;
+      return true;
+    }
+    if (availableResources.energy >= this.requiredEnergy) {
+      availableResources.substract(new Energy(this.requiredEnergy));
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Collects the resources produced by this module if it has power
+   * @returns {ResourceCollection} The provided resources
+   */
+  collectResources() {
+    if (this.hasPower) {
+      return this.getPotentialResources();
+    }
+    return new ResourceCollection();
+  }
+
+  /**
+   * Gets a ResourceCollection of resources this module will provide when
+   * powered
+   * @returns {ResourceCollection} Resources the module is capable of outputting
+   */
+  getPotentialResources() {
+    return new ResourceCollection();
   }
 }
 
 // eslint-disable-next-line no-unused-vars
 class EngineModule extends Module {
+  getPotentialResources() {
+    return new ResourceCollection(new Time(1));
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
 class WeaponModule extends Module {
+  getPotentialResources() {
+    return new ResourceCollection(new Firepower(1));
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
 class LifeSupportModule extends Module {
+  getPotentialResources() {
+    return new ResourceCollection(new Food(1));
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
 class ShieldModule extends Module {
-}
-
-// eslint-disable-next-line no-unused-vars
-class StorageModule extends Module {
+  getPotentialResources() {
+    return new ResourceCollection(new Shield(1));
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
 class GeneratorModule extends Module {
+  getPotentialResources() {
+    return new ResourceCollection(new Energy(1));
+  }
 }

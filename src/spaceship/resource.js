@@ -74,7 +74,12 @@ export class Time extends Resource { }
 /**
  * Firepower resource type
  */
-export class Firepower extends Resource {}
+export class Firepower extends Resource { }
+
+/**
+ * Shield resource type
+ */
+export class Shield extends Resource { }
 
 
 /**
@@ -145,6 +150,14 @@ export class ResourceCollection {
   }
 
   /**
+   * Shield amount
+   * @type {number}
+   */
+  get shield() {
+    return this.get(Shield);
+  }
+
+  /**
    * forEach going over all the resources in this ResourceCollection
    * @type {Function}
    */
@@ -160,8 +173,7 @@ export class ResourceCollection {
     if (this.resources.has(resource.constructor)) {
       this.resources.get(resource.constructor).add(resource);
     } else {
-      let val = new resource.constructor(resource.value); // Copy the object
-      this.resources.set(resource.constructor, val);
+      this.set(resource);
     }
   }
 
@@ -203,5 +215,14 @@ export class ResourceCollection {
       this.resources.set(resourceClass, new resourceClass(0));
     }
     return this.resources.get(resourceClass).value;
+  }
+
+  /**
+   * Set a resource to the collection
+   * @param {*} resource - Resource to be set
+   */
+  set(resource) {
+    let val = new resource.constructor(resource.value); // Copy the object
+    this.resources.set(resource.constructor, val);
   }
 }
