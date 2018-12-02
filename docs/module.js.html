@@ -26,7 +26,7 @@
 
 <nav>
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#collectResources">collectResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#providePower">providePower</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#collectResources">collectResources</a></li><li data-type='method'><a href="Module.html#getPotentialResources">getPotentialResources</a></li><li data-type='method'><a href="Module.html#providePower">providePower</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#set">set</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Shield.html">Shield</a></li><li><a href="Spaceship.html">Spaceship</a><ul class='methods'><li data-type='method'><a href="Spaceship.html#addCompartment">addCompartment</a></li><li data-type='method'><a href="Spaceship.html#removeCompartment">removeCompartment</a></li><li data-type='method'><a href="Spaceship.html#updateResources">updateResources</a></li></ul></li><li><a href="Time.html">Time</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Compartment.html">Compartment</a><ul class='methods'><li data-type='method'><a href="Compartment.html#addModule">addModule</a></li><li data-type='method'><a href="Compartment.html#canFitModule">canFitModule</a></li><li data-type='method'><a href="Compartment.html#collectResources">collectResources</a></li><li data-type='method'><a href="Compartment.html#hasModule">hasModule</a></li><li data-type='method'><a href="Compartment.html#providePower">providePower</a></li><li data-type='method'><a href="Compartment.html#removeModule">removeModule</a></li></ul></li><li><a href="Crew.html">Crew</a></li><li><a href="Energy.html">Energy</a></li><li><a href="EngineModule.html">EngineModule</a></li><li><a href="Firepower.html">Firepower</a></li><li><a href="Food.html">Food</a></li><li><a href="GeneratorModule.html">GeneratorModule</a></li><li><a href="LifeSupportModule.html">LifeSupportModule</a></li><li><a href="Module.html">Module</a><ul class='methods'><li data-type='method'><a href="Module.html#collectResources">collectResources</a></li><li data-type='method'><a href="Module.html#disable">disable</a></li><li data-type='method'><a href="Module.html#enable">enable</a></li><li data-type='method'><a href="Module.html#getPotentialResources">getPotentialResources</a></li><li data-type='method'><a href="Module.html#providePower">providePower</a></li><li data-type='method'><a href="Module.html#setCompartment">setCompartment</a></li><li data-type='method'><a href="Module.html#unsetCompartment">unsetCompartment</a></li></ul></li><li><a href="Money.html">Money</a></li><li><a href="Resource.html">Resource</a><ul class='methods'><li data-type='method'><a href="Resource.html#add">add</a></li><li data-type='method'><a href="Resource.html#substract">substract</a></li></ul></li><li><a href="ResourceCollection.html">ResourceCollection</a><ul class='methods'><li data-type='method'><a href="ResourceCollection.html#add">add</a></li><li data-type='method'><a href="ResourceCollection.html#addFromCollection">addFromCollection</a></li><li data-type='method'><a href="ResourceCollection.html#get">get</a></li><li data-type='method'><a href="ResourceCollection.html#isEqual">isEqual</a></li><li data-type='method'><a href="ResourceCollection.html#set">set</a></li><li data-type='method'><a href="ResourceCollection.html#substract">substract</a></li><li data-type='method'><a href="ResourceCollection.html#substractFromCollection">substractFromCollection</a></li></ul></li><li><a href="Shield.html">Shield</a></li><li><a href="ShieldModule.html">ShieldModule</a></li><li><a href="Spaceship.html">Spaceship</a><ul class='methods'><li data-type='method'><a href="Spaceship.html#addCompartment">addCompartment</a></li><li data-type='method'><a href="Spaceship.html#hasCompartment">hasCompartment</a></li><li data-type='method'><a href="Spaceship.html#removeCompartment">removeCompartment</a></li><li data-type='method'><a href="Spaceship.html#updateResources">updateResources</a></li></ul></li><li><a href="Time.html">Time</a></li><li><a href="WeaponModule.html">WeaponModule</a></li></ul>
 </nav>
 
 <div id="main">
@@ -62,7 +62,7 @@ export class Module {
     this._requiredCapacity = requiredCapacity;
     this._requiredEnergy = requiredEnergy;
     this._compartment = null;
-    this._hasPower = false;
+    this._hasPower = requiredEnergy &lt;= 0;
     this._isDisabled = false;
   }
 
@@ -123,6 +123,20 @@ export class Module {
   }
 
   /**
+   * Enable this module
+   */
+  disable() {
+    this._isDisabled = true;
+  }
+
+  /**
+   * Disable this module
+   */
+  enable() {
+    this._isDisabled = false;
+  }
+
+  /**
    * Sets this modules' compartment.
    * @param {Compartment} compartment - The compartment to set to
    * @returns {boolean} True if successful, false otherwise
@@ -153,16 +167,17 @@ export class Module {
    * @param {ResourceCollection} availableResources
    */
   providePower(availableResources) {
-    this.hasPower = false;
+    this._hasPower = false;
     if (this.isDisabled) {
       return false;
     }
     if (this.requiredEnergy &lt;= 0) {
-      this.hasPower = true;
+      this._hasPower = true;
       return true;
     }
     if (availableResources.energy >= this.requiredEnergy) {
       availableResources.substract(new Energy(this.requiredEnergy));
+      this._hasPower = true;
       return true;
     }
     return false;
@@ -189,36 +204,46 @@ export class Module {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class EngineModule extends Module {
+/**
+ * Module which provides time
+ */
+export class EngineModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Time(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class WeaponModule extends Module {
+/**
+ * Module which provides firepower
+ */
+export class WeaponModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Firepower(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class LifeSupportModule extends Module {
+/**
+ * Module which provides food
+ */
+export class LifeSupportModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Food(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class ShieldModule extends Module {
+/**
+ * Module which provides shield
+ */
+export class ShieldModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Shield(1));
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-class GeneratorModule extends Module {
+/**
+ * Module which provides energy
+ */
+export class GeneratorModule extends Module {
   getPotentialResources() {
     return new ResourceCollection(new Energy(1));
   }
@@ -237,7 +262,7 @@ class GeneratorModule extends Module {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 16:51:19 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 21:05:56 GMT+0200 (Eastern European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
