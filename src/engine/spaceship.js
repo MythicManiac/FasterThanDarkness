@@ -4,7 +4,7 @@ import { ResourceCollection, Energy } from "./resource";
 /**
  * Spaceship
  */
-export class Spaceship {
+export class ISpaceship {
   constructor() {
     // TODO: Convert to use a Map() instead, mapping by name
     this._compartments = [];

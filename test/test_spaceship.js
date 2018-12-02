@@ -1,13 +1,13 @@
-import { EngineModule, GeneratorModule, ShieldModule } from "../src/spaceship/module";
-import { Compartment } from "../src/spaceship/compartment";
-import { Spaceship } from "../src/spaceship/spaceship";
+import { EngineModule, GeneratorModule, ShieldModule } from "../src/engine/module";
+import { Compartment } from "../src/engine/compartment";
+import { ISpaceship } from "../src/engine/spaceship";
 
 import { expect } from "chai";
 
 
 describe("Spaceship", function() {
   it("Should be able to add compartments", function() {
-    let spaceship = new Spaceship();
+    let spaceship = new ISpaceship();
     let comp1 = new Compartment("Test compartment", 5);
     let comp2 = new Compartment("Test compartment", 2);
     expect(spaceship.hasCompartment(comp1)).to.be.false;
@@ -21,7 +21,7 @@ describe("Spaceship", function() {
     expect(spaceship.hasCompartment(comp2)).to.be.true;
   });
   it("Should be able to remove compartments", function() {
-    let spaceship = new Spaceship();
+    let spaceship = new ISpaceship();
     let comp1 = new Compartment("Test compartment", 5);
     let comp2 = new Compartment("Test compartment", 2);
     expect(spaceship.removeCompartment(comp1)).to.be.false; // Not added yet
@@ -38,7 +38,7 @@ describe("Spaceship", function() {
     expect(spaceship.hasCompartment(comp2)).to.be.false;
   });
   it("Should be able to tell if it has a specific compartment", function() {
-    let spaceship = new Spaceship();
+    let spaceship = new ISpaceship();
     let comp1 = new Compartment("Test compartment", 5);
     let comp2 = new Compartment("Test compartment", 2);
     expect(spaceship.hasCompartment(comp1)).to.be.false;
@@ -57,7 +57,7 @@ describe("Spaceship", function() {
     expect(spaceship.hasCompartment(comp2)).to.be.false;
   });
   it("Should be able to fetch a compartment by name", function() {
-    let spaceship = new Spaceship();
+    let spaceship = new ISpaceship();
     let comp1 = new Compartment("Test compartment 1", 5);
     let comp2 = new Compartment("Test compartment 2", 4);
     expect(spaceship.addCompartment(comp1)).to.be.true;
@@ -69,7 +69,7 @@ describe("Spaceship", function() {
   });
   describe("Resources", function() {
     it("Should be able to know unused energy amount", function() {
-      let spaceship = new Spaceship();
+      let spaceship = new ISpaceship();
       let compartment1 = new Compartment("Compartment 1", 10);
       let compartment2 = new Compartment("Compartment 2", 10);
       let generator1 = new GeneratorModule("Generator", 1, 1);
@@ -103,7 +103,7 @@ describe("Spaceship", function() {
       expect(spaceship.resources.time).to.equal(0);
     });
     it("Should be able to collect resources from powered modules", function() {
-      let spaceship = new Spaceship();
+      let spaceship = new ISpaceship();
       let compartment1 = new Compartment("Compartment 1", 10);
       let compartment2 = new Compartment("Compartment 2", 10);
       let generator = new GeneratorModule("Generator", 1, 10);
@@ -124,7 +124,7 @@ describe("Spaceship", function() {
     });
     it("Should be able to partial collect resources from modules", function() {
       // This means some modules are unpowered
-      let spaceship = new Spaceship();
+      let spaceship = new ISpaceship();
       let compartment1 = new Compartment("Compartment 1", 10);
       let compartment2 = new Compartment("Compartment 2", 10);
       let generator = new GeneratorModule("Generator", 1, 1);

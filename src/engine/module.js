@@ -6,7 +6,7 @@ import {
 /**
  * Spaceship module
  */
-export class Module {
+export class IModule {
 
   /**
    * Creates a new module instance
@@ -164,7 +164,7 @@ export class Module {
 /**
  * Abstract base class for modules that provide a single resource only
  */
-export class SingleResourceModule extends Module {
+export class ISingleResourceModule extends IModule {
 
   /**
    * Create a new instance of this module
@@ -199,7 +199,7 @@ export class SingleResourceModule extends Module {
 /**
  * Module which provides time
  */
-export class EngineModule extends SingleResourceModule {
+export class EngineModule extends ISingleResourceModule {
   get resourceClass() {
     return Time;
   }
@@ -208,7 +208,7 @@ export class EngineModule extends SingleResourceModule {
 /**
  * Module which provides firepower
  */
-export class WeaponModule extends SingleResourceModule {
+export class WeaponModule extends ISingleResourceModule {
   get resourceClass() {
     return Firepower;
   }
@@ -217,7 +217,7 @@ export class WeaponModule extends SingleResourceModule {
 /**
  * Module which provides food
  */
-export class LifeSupportModule extends SingleResourceModule {
+export class LifeSupportModule extends ISingleResourceModule {
   get resourceClass() {
     return Food;
   }
@@ -226,7 +226,7 @@ export class LifeSupportModule extends SingleResourceModule {
 /**
  * Module which provides shield
  */
-export class ShieldModule extends SingleResourceModule {
+export class ShieldModule extends ISingleResourceModule {
   get resourceClass() {
     return Shield;
   }
@@ -235,7 +235,7 @@ export class ShieldModule extends SingleResourceModule {
 /**
  * Module which provides energy
  */
-export class GeneratorModule extends SingleResourceModule {
+export class GeneratorModule extends ISingleResourceModule {
 
   /**
    * Create a new generator instance

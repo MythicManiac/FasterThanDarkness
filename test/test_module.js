@@ -1,29 +1,29 @@
 import {
-  Module, EngineModule, ShieldModule,
+  IModule, EngineModule, ShieldModule,
   LifeSupportModule, WeaponModule, GeneratorModule,
-  SingleResourceModule
-} from "../src/spaceship/module";
-import { Compartment } from "../src/spaceship/compartment";
+  ISingleResourceModule
+} from "../src/engine/module";
+import { Compartment } from "../src/engine/compartment";
 
 import { expect } from "chai";
-import { ResourceCollection, Energy, Time, Shield, Food, Firepower } from "../src/spaceship/resource";
+import { ResourceCollection, Energy, Time, Shield, Food, Firepower } from "../src/engine/resource";
 
 
 describe("Module", function() {
   it("Should have a working name property", function() {
-    let module = new Module("Test module", 1, 1);
+    let module = new IModule("Test module", 1, 1);
     expect(module.name).to.equal("Test module");
   });
   it("Should have a working required capacity property", function() {
-    let module = new Module("Test module", 5, 1);
+    let module = new IModule("Test module", 5, 1);
     expect(module.requiredCapacity).to.equal(5);
   });
   it("Should have a working energy consumption property", function() {
-    let module = new Module("Test module", 1, 5);
+    let module = new IModule("Test module", 1, 5);
     expect(module.requiredEnergy).to.equal(5);
   });
   it("Should have working compartment logic", function() {
-    let module = new Module("Test module", 1, 1);
+    let module = new IModule("Test module", 1, 1);
     let compartment = new Compartment("Test compartment", 1);
     let compartment2 = new Compartment("Test compartment 2", 1);
     expect(module.isHoused).to.be.false;
@@ -43,7 +43,7 @@ describe("Module", function() {
     expect(module.compartment).to.equal(compartment2);
   });
   it("Should update powered status properly", function() {
-    let module = new Module("Test module", 1, 5);
+    let module = new IModule("Test module", 1, 5);
     expect(module.hasPower).to.be.false;
     let resources = new ResourceCollection(new Energy(4));
     expect(resources.energy).to.equal(4);
@@ -60,14 +60,14 @@ describe("Module", function() {
     expect(resources.energy).to.equal(1);
   });
   it("Should always be powered if no energy is required", function() {
-    let module = new Module("Test module", 1, 0);
+    let module = new IModule("Test module", 1, 0);
     expect(module.hasPower).to.be.true;
     let resources = new ResourceCollection(new Energy(-5));
     expect(module.providePower(resources)).to.be.true;
     expect(module.hasPower).to.be.true;
   });
   it("Should be able to indicate potential resources", function() {
-    let module = new Module("Test", 1, 1);
+    let module = new IModule("Test", 1, 1);
     let resources = new ResourceCollection();
     expect(module.getPotentialResources().isEqual(resources)).to.be.true;
     module = new EngineModule("Engine", 1, 1);
@@ -100,7 +100,7 @@ describe("Module", function() {
     expect(module.collectResources().isEqual(expected)).to.be.true;
   });
   it("Should be able to be enabled and disabled", function() {
-    let module = new Module("Test", 1, 1);
+    let module = new IModule("Test", 1, 1);
     expect(module.isDisabled).to.be.false;
     module.disable();
     expect(module.isDisabled).to.be.true;
@@ -120,7 +120,7 @@ describe("Module", function() {
   });
   describe("SingleResourceModule", function() {
     it("Should not provide any resource by default", function() {
-      let module = new SingleResourceModule("Test module", 1, 1);
+      let module = new ISingleResourceModule("Test module", 1, 1);
       let nothing = new ResourceCollection();
       expect(module.getPotentialResources().isEqual(nothing));
     });

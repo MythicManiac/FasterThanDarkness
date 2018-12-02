@@ -1,10 +1,9 @@
 import {
   Energy, Crew, Food, Shield,
   Money, Time, ResourceCollection, Firepower
-} from "../src/spaceship/resource";
+} from "../src/engine/resource";
 
 import { expect } from "chai";
-import { isRegExp } from "util";
 
 
 describe("Resources", function() {
