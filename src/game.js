@@ -28,33 +28,31 @@ class ResourceScreen {
 
   updateContainer(resources) {
     let baseResources = new ResourceCollection(
-      new Energy(0),
-      new Crew(0),
-      new Firepower(0),
       new Time(0),
-      new Money(0),
+      new Energy(0),
+      new Firepower(0),
       new Shield(0),
-      new Food(0)
+      new Food(0),
+      new Crew(0),
+      new Money(0)
     );
     baseResources.addFromCollection(resources);
     let container = new PIXI.Container();
     let text_style = new PIXI.TextStyle({
       fontFamily: "Arial",
-      fontSize: 12,
+      fontSize: 24,
       fill: "white",
     });
 
     let index = 0;
     baseResources.forEach((resource, resourceClass) => {
       let sprite = new PIXI.Sprite(this.textureMap.get(resourceClass));
-      sprite.width = 32;
-      sprite.height = 32;
-      sprite.x = 5;
-      sprite.y = 20 + (index * (32 + 5));
+      sprite.x = 50 + (index * (64 + 10 + 64));
+      sprite.y = 10;
       container.addChild(sprite);
 
       let text = new PIXI.Text(resource.value, text_style);
-      text.x = sprite.x + sprite.width + 5;
+      text.x = sprite.x + sprite.width + 64 / 2 - text.width / 2;
       text.y = sprite.y + sprite.height / 2 - text.height / 2;
       container.addChild(text);
 
@@ -87,11 +85,16 @@ export class Game {
       .add("assets/resource_money.png")
       .add("assets/resource_crew.png")
       .add("assets/resource_firepower.png")
+      .add("assets/space_background.png")
       .load(this.setup.bind(this));
   }
 
   setup() {
     this.container = new PIXI.Container();
+
+    let background = new PIXI.Sprite(getTexture("assets/space_background.png"));
+    this.container.addChild(background);
+
     this.resourceScreen = new ResourceScreen();
     this.resourceScreen.updateContainer(this.spaceship.resources);
     this.container.addChild(this.resourceScreen.container);
@@ -100,9 +103,6 @@ export class Game {
     this.container.addChild(this.ship);
 
     this.app.stage.addChild(this.container);
-    this.container.scale.x = 2;
-    this.container.scale.y = 2;
-
     this.app.ticker.add(delta => this.gameLoop(delta));
   }
 
