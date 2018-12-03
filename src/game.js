@@ -1,64 +1,78 @@
 import * as PIXI from "pixi.js";
 import { Spaceship } from "./content/spaceships";
 import {
-  ResourceCollection, Energy, Crew, Firepower,
+  Energy, Crew, Firepower,
   Time, Money, Shield, Food
 } from "./engine/resource";
 PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
+
+const TEXT_STYLE = new PIXI.TextStyle({
+  fontFamily: "Arial",
+  fontSize: 24,
+  fill: "white",
+});
 
 
 function getTexture(name) {
   return PIXI.loader.resources[name].texture;
 }
 
-
-class ResourceScreen {
-  constructor() {
+class ResourceRenderer {
+  constructor(texture) {
     this.container = new PIXI.Container();
-    this.textureMap = new Map([
-      [Energy, getTexture("assets/resource_energy.png")],
-      [Crew, getTexture("assets/resource_crew.png")],
-      [Firepower, getTexture("assets/resource_firepower.png")],
-      [Time, getTexture("assets/resource_time.png")],
-      [Money, getTexture("assets/resource_money.png")],
-      [Shield, getTexture("assets/resource_shield.png")],
-      [Food, getTexture("assets/resource_food.png")]
-    ]);
+    this.sprite = new PIXI.Sprite(texture);
+    this.text = new PIXI.Text("0", TEXT_STYLE);
+    this.container.addChild(this.sprite);
+    this.container.addChild(this.text);
+    this.updateText("0");
   }
 
-  updateContainer(resources) {
-    let baseResources = new ResourceCollection(
-      new Time(0),
-      new Energy(0),
-      new Firepower(0),
-      new Shield(0),
-      new Food(0),
-      new Crew(0),
-      new Money(0)
-    );
-    baseResources.addFromCollection(resources);
-    let container = new PIXI.Container();
-    let text_style = new PIXI.TextStyle({
-      fontFamily: "Arial",
-      fontSize: 24,
-      fill: "white",
-    });
+  get width() {
+    return this.sprite.width + 48;
+  }
 
+  updateText(newText) {
+    this.text.text = newText.toString();
+    this.text.x = this.sprite.width + 48 / 2 - this.text.width / 2;
+    this.text.y = this.sprite.height / 2 - this.text.height / 2;
+  }
+}
+
+
+class ResourceCollectionRenderer {
+  constructor() {
+    this.container = new PIXI.Container();
+    this.resourceRenderers = new Map([
+      [Time, new ResourceRenderer(getTexture("assets/resource_time.png"))],
+      [Energy, new ResourceRenderer(getTexture("assets/resource_energy.png"))],
+      [Firepower, new ResourceRenderer(getTexture("assets/resource_firepower.png"))],
+      [Shield, new ResourceRenderer(getTexture("assets/resource_shield.png"))],
+      // [Food, new ResourceRenderer(getTexture("assets/resource_food.png"))],
+      // [Crew, new ResourceRenderer(getTexture("assets/resource_crew.png"))],
+      [Money, new ResourceRenderer(getTexture("assets/resource_money.png"))]
+    ]);
+    let padding = 10;
     let index = 0;
-    baseResources.forEach((resource, resourceClass) => {
-      let sprite = new PIXI.Sprite(this.textureMap.get(resourceClass));
-      sprite.x = 50 + (index * (64 + 10 + 64));
-      sprite.y = 10;
-      container.addChild(sprite);
-
-      let text = new PIXI.Text(resource.value, text_style);
-      text.x = sprite.x + sprite.width + 64 / 2 - text.width / 2;
-      text.y = sprite.y + sprite.height / 2 - text.height / 2;
-      container.addChild(text);
-
+    this._width = 0;
+    this.resourceRenderers.forEach(renderer => {
+      this.container.addChild(renderer.container);
+      renderer.container.x = index * (renderer.width + padding);
+      this._width += renderer.width + padding;
       index += 1;
     });
-    this.container = container;
+  }
+
+  get width() {
+    return this._width;
+  }
+
+  updateResources(resources) {
+    resources.forEach((resource, resourceClass) => {
+      let renderer = this.resourceRenderers.get(resourceClass);
+      if (renderer) {
+        renderer.updateText(resource.value);
+      }
+    });
   }
 }
 
@@ -66,9 +80,10 @@ class ResourceScreen {
 export class Game {
   constructor() {
     this.app = new PIXI.Application({
-      width: 1280,
-      height: 720,
+      width: 1920,
+      height: 1080,
       roundPixels: true,
+      transparent: true,
     });
     this.spaceship = new Spaceship();
     this.spaceship.updateResources();
@@ -77,7 +92,7 @@ export class Game {
   run() {
     document.body.appendChild(this.app.view);
     PIXI.loader
-      .add("assets/ship.png")
+      .add("assets/spaceship.png")
       .add("assets/resource_energy.png")
       .add("assets/resource_time.png")
       .add("assets/resource_shield.png")
@@ -92,21 +107,20 @@ export class Game {
   setup() {
     this.container = new PIXI.Container();
 
-    let background = new PIXI.Sprite(getTexture("assets/space_background.png"));
-    this.container.addChild(background);
+    this.resourceRenderer = new ResourceCollectionRenderer();
+    this.resourceRenderer.updateResources(this.spaceship.resources);
+    this.resourceRenderer.container.x = (
+      (1920 / 2) - this.resourceRenderer.width / 2
+    );
+    this.container.addChild(this.resourceRenderer.container);
 
-    this.resourceScreen = new ResourceScreen();
-    this.resourceScreen.updateContainer(this.spaceship.resources);
-    this.container.addChild(this.resourceScreen.container);
-
-    this.ship = new PIXI.Sprite(PIXI.loader.resources["assets/ship.png"].texture);
+    this.ship = new PIXI.Sprite(getTexture("assets/spaceship.png"));
     this.container.addChild(this.ship);
 
     this.app.stage.addChild(this.container);
-    this.app.ticker.add(delta => this.gameLoop(delta));
+    this.app.ticker.add(this.update.bind(this));
   }
 
-  gameLoop() {
-    this.ship.x += 1;
+  update(delta) {
   }
 }

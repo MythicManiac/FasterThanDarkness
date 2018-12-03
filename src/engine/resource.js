@@ -94,6 +94,13 @@ export class ResourceCollection {
    */
   constructor(...resources) {
     this._resources = new Map();
+    resources.push(new Time(0));
+    resources.push(new Energy(0));
+    resources.push(new Firepower(0));
+    resources.push(new Shield(0));
+    resources.push(new Food(0));
+    resources.push(new Crew(0));
+    resources.push(new Money(0));
     resources.forEach(resource => {
       this.add(resource);
     });
